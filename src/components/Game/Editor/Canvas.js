@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import { Stage, Layer, Line } from "react-konva";
 import styled from "styled-components";
 
+import Alert from "../Alert";
+
 const Canvas = ({ socket, lines, setLines, options }) => {
   const stageRef = useRef(null);
 
@@ -34,24 +36,34 @@ const Canvas = ({ socket, lines, setLines, options }) => {
   };
 
   return (
-    <Container options={options}>
-      <Stage
-        width={500}
-        height={500}
-        onContentMousedown={handleMouseDown}
-        onContentMousemove={handleMouseMove}
-        onContentMouseup={handleMouseUp}
-        ref={stageRef}
-      >
-        <Layer>
-          {lines.map((line, i) => (
-            <Line key={i} {...line} />
-          ))}
-        </Layer>
-      </Stage>
-    </Container>
+    <Wrapper>
+      <Alert socket={socket} />
+      <Container options={options}>
+        <Stage
+          width={500}
+          height={500}
+          onContentMousedown={handleMouseDown}
+          onContentMousemove={handleMouseMove}
+          onContentMouseup={handleMouseUp}
+          ref={stageRef}
+        >
+          <Layer>
+            {lines.map((line, i) => (
+              <Line key={i} {...line} />
+            ))}
+          </Layer>
+        </Stage>
+      </Container>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  position: relative;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+`;
 
 const Container = styled.div`
   cursor: ${(props) => {
@@ -61,8 +73,6 @@ const Container = styled.div`
     const url = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${dim}' height='${dim}'><circle cx='${rad}' cy='${rad}' r='${rad}' fill='${color}' /></svg>") ${rad} ${rad}, auto`;
     return url;
   }};
-  border-radius: 10px;
-  background: white;
 `;
 
 export default Canvas;

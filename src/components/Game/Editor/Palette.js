@@ -73,7 +73,10 @@ const Palette = ({ options, setOptions }) => (
 );
 
 const Container = styled.div`
-  margin-top: 10px;
+  display: inline-block;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 export default Palette;

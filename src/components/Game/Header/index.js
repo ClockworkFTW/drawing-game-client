@@ -2,21 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Header = ({ socket }) => {
-  const [words, setWords] = useState([]);
-  const [alert, setAlert] = useState("");
+  const [word, setWord] = useState("");
   const [timer, setTimer] = useState("");
 
   useEffect(() => {
-    socket.on("words", (words) => {
-      setAlert("");
-      setWords(words);
-    });
-  }, []);
-
-  useEffect(() => {
-    socket.on("alert", (alert) => {
-      setWords("");
-      setAlert(alert);
+    socket.on("word", (word) => {
+      setWord(word);
     });
   }, []);
 
@@ -26,18 +17,9 @@ const Header = ({ socket }) => {
     });
   }, []);
 
-  const pickWord = (word) => socket.emit("pick word", word);
-
   return (
     <Container>
-      {words
-        ? words.map((word, i) => (
-            <button key={i} onClick={() => pickWord(word)}>
-              {word}
-            </button>
-          ))
-        : null}
-      {alert ? <h1>{alert}</h1> : null}
+      {word ? <h1>{word}</h1> : null}
       {timer ? <h1>{timer}</h1> : null}
     </Container>
   );
