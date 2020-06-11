@@ -2,14 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Header = ({ socket }) => {
-  const [word, setWord] = useState("");
   const [timer, setTimer] = useState("");
-
-  useEffect(() => {
-    socket.on("word", (word) => {
-      setWord(word);
-    });
-  }, []);
+  const [word, setWord] = useState("");
 
   useEffect(() => {
     socket.on("timer", (time) => {
@@ -17,10 +11,16 @@ const Header = ({ socket }) => {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on("word", (word) => {
+      setWord(word);
+    });
+  }, []);
+
   return (
     <Container>
-      {word ? <h1>{word}</h1> : null}
-      {timer ? <h1>{timer}</h1> : null}
+      {timer ? <Timer>{timer}</Timer> : null}
+      {word ? <Word>{word}</Word> : null}
     </Container>
   );
 };
@@ -30,6 +30,15 @@ const Container = styled.div`
   padding: 20px;
   border-radius: 10px;
   background: white;
+`;
+
+const Word = styled.h1`
+  font-size: 20px;
+  letter-spacing: 3px;
+`;
+
+const Timer = styled.h1`
+  font-size: 20px;
 `;
 
 export default Header;
