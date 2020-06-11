@@ -5,7 +5,7 @@ import Palette from "./Palette";
 import Brush from "./Brush";
 import Canvas from "./Canvas";
 
-const Editor = ({ socket }) => {
+const Editor = ({ socket, name }) => {
   const [options, setOptions] = useState({
     stroke: "#000000",
     strokeWidth: 10,
@@ -13,18 +13,30 @@ const Editor = ({ socket }) => {
     lineJoin: "round",
     globalCompositeOperation: "source-over",
   });
-
   const [lines, setLines] = useState([]);
+  const [blocked, setBlocked] = useState(true);
 
   useEffect(() => {
     socket.on("draw", (lines) => {
       setLines(lines);
     });
-  }, []);
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("players", (players) => {
+      players.forEach((player) => {
+        if (player.name === name && player.drawing) {
+          setBlocked(false);
+        }
+      });
+    });
+  }, [socket, name]);
 
   const clear = () => {
-    setLines([]);
-    socket.emit("draw", []);
+    if (!blocked) {
+      setLines([]);
+      socket.emit("draw", []);
+    }
   };
 
   return (
@@ -34,6 +46,7 @@ const Editor = ({ socket }) => {
         lines={lines}
         setLines={setLines}
         options={options}
+        blocked={blocked}
       />
       <Palette options={options} setOptions={setOptions} />
       <Brush options={options} setOptions={setOptions} />

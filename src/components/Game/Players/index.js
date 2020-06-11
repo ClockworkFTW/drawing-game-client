@@ -8,7 +8,7 @@ const Players = ({ socket }) => {
     socket.on("players", (players) => {
       setPlayers(players);
     });
-  }, []);
+  }, [socket]);
 
   return (
     <Container>

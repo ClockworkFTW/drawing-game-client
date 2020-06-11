@@ -4,14 +4,16 @@ import styled from "styled-components";
 
 import Alert from "../Alert";
 
-const Canvas = ({ socket, lines, setLines, options }) => {
+const Canvas = ({ socket, lines, setLines, options, blocked }) => {
   const stageRef = useRef(null);
 
   const [drawing, setDrawing] = useState(false);
 
   const handleMouseDown = () => {
-    setDrawing(true);
-    setLines([...lines, { ...options, points: [] }]);
+    if (!blocked) {
+      setDrawing(true);
+      setLines([...lines, { ...options, points: [] }]);
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -32,13 +34,15 @@ const Canvas = ({ socket, lines, setLines, options }) => {
   };
 
   const handleMouseUp = () => {
-    setDrawing(false);
+    if (!blocked) {
+      setDrawing(false);
+    }
   };
 
   return (
     <Wrapper>
       <Alert socket={socket} />
-      <Container options={options}>
+      <Container options={options} blocked={blocked}>
         <Stage
           width={500}
           height={500}
@@ -71,7 +75,7 @@ const Container = styled.div`
     const rad = props.options.strokeWidth / 2;
     const color = `%23${props.options.stroke.slice(1)}`;
     const url = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${dim}' height='${dim}'><circle cx='${rad}' cy='${rad}' r='${rad}' fill='${color}' /></svg>") ${rad} ${rad}, auto`;
-    return url;
+    return props.blocked ? "cursor" : url;
   }};
 `;
 

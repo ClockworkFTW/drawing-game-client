@@ -9,13 +9,13 @@ const Header = ({ socket }) => {
     socket.on("timer", (time) => {
       time === 0 ? setTimer("") : setTimer(time);
     });
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     socket.on("word", (word) => {
       setWord(word);
     });
-  }, []);
+  }, [socket]);
 
   return (
     <Container>

@@ -10,21 +10,21 @@ const Alert = ({ socket }) => {
       setWords([]);
       setAlert(alert);
     });
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     socket.on("words", (words) => {
       setWords(words);
       setAlert("");
     });
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     socket.on("word", (word) => {
       setWords([]);
       setAlert("");
     });
-  }, []);
+  }, [socket]);
 
   const pickWord = (word) => {
     socket.emit("pick word", word);

@@ -12,7 +12,7 @@ import Chat from "./Chat";
 const ENDPOINT = "http://localhost:3005/";
 let socket;
 
-const Game = ({}) => {
+const Game = () => {
   const { search } = useLocation();
   const [name, setName] = useState("");
   const [game, setGame] = useState("");
@@ -30,7 +30,7 @@ const Game = ({}) => {
     return () => {
       socket.close();
     };
-  }, [ENDPOINT]);
+  }, [search]);
 
   return !error ? (
     socket ? (
@@ -38,7 +38,7 @@ const Game = ({}) => {
         <Header socket={socket} />
         <Container>
           <Players socket={socket} />
-          <Editor socket={socket} />
+          <Editor socket={socket} name={name} />
           <Chat socket={socket} name={name} />
         </Container>
       </Wrapper>

@@ -12,7 +12,7 @@ const Chat = ({ socket, name }) => {
     socket.on("chat", (message) => {
       setMessages((msgs) => [...msgs, message]);
     });
-  }, []);
+  }, [socket]);
 
   const sendMessage = (e) => {
     e.preventDefault();
