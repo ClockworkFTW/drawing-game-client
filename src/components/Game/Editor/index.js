@@ -13,6 +13,7 @@ const Editor = ({ socket, name }) => {
     lineJoin: "round",
     globalCompositeOperation: "source-over",
   });
+
   const [lines, setLines] = useState([]);
   const [blocked, setBlocked] = useState(true);
 

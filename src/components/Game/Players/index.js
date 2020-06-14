@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Players = ({ socket }) => {
+const Players = ({ socket, name }) => {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
@@ -15,9 +15,15 @@ const Players = ({ socket }) => {
       {players
         .sort((a, b) => b.score - a.score)
         .map((player, i) => (
-          <Player key={i} drawing={player.drawing} locked={player.locked}>
+          <Player key={i}>
             <Score>{player.score}</Score>
-            <Name>{player.name}</Name>
+            <Name
+              me={player.name === name}
+              drawing={player.drawing}
+              locked={player.locked}
+            >
+              {player.name}
+            </Name>
             <Avatar name={player.name} />
           </Player>
         ))}
@@ -37,13 +43,26 @@ const Player = styled.li`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background: ${(props) =>
-    props.drawing ? "red" : props.locked ? "green" : "none"};
+  &:nth-child(even) {
+    background: #edf2f7;
+  }
 `;
 
 const Score = styled.h1``;
 
-const Name = styled.h1``;
+const Name = styled.h1`
+  color: ${(props) => {
+    if (props.drawing) {
+      return "#D53F8C";
+    } else if (props.locked) {
+      return "#38A169";
+    } else if (props.me) {
+      return "#3182CE";
+    } else {
+      return "#000000";
+    }
+  }};
+`;
 
 const Avatar = styled.div`
   width: 50px;

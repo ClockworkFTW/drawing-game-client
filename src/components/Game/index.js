@@ -37,7 +37,7 @@ const Game = () => {
       <Wrapper>
         <Header socket={socket} />
         <Container>
-          <Players socket={socket} />
+          <Players socket={socket} name={name} />
           <Editor socket={socket} name={name} />
           <Chat socket={socket} name={name} />
         </Container>
@@ -51,7 +51,10 @@ const Game = () => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+`;
 
 const Container = styled.div`
   display: flex;

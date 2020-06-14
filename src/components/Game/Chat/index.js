@@ -35,8 +35,8 @@ const Chat = ({ socket, name }) => {
 };
 
 const Container = styled.ul`
+  overflow: scroll;
   margin: 10px;
-  padding: 20px;
   flex: 0 0 400px;
   border-radius: 10px;
   background: white;

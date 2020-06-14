@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Alert from "../Alert";
 
 const Canvas = ({ socket, lines, setLines, options, blocked }) => {
+  const [dimensions, setDimensions] = useState({ width: 500, height: 500 });
+
   const stageRef = useRef(null);
 
   const [drawing, setDrawing] = useState(false);
@@ -44,8 +46,8 @@ const Canvas = ({ socket, lines, setLines, options, blocked }) => {
       <Alert socket={socket} />
       <Container options={options} blocked={blocked}>
         <Stage
-          width={500}
-          height={500}
+          width={dimensions.width}
+          height={dimensions.height}
           onContentMousedown={handleMouseDown}
           onContentMousemove={handleMouseMove}
           onContentMouseup={handleMouseUp}
