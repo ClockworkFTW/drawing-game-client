@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Avatar from "avataaars";
 import styled from "styled-components";
 
 const Players = ({ socket, name }) => {
@@ -24,7 +25,11 @@ const Players = ({ socket, name }) => {
             >
               {player.name}
             </Name>
-            <Avatar name={player.name} />
+            <Avatar
+              style={{ width: "80px", height: "80px" }}
+              avatarStyle="Transparent"
+              {...player.avatar}
+            />
           </Player>
         ))}
     </Container>
@@ -46,7 +51,7 @@ const Player = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0 10px 0 20px;
   &:nth-child(even) {
     background: #edf2f7;
   }
@@ -68,14 +73,14 @@ const Name = styled.h1`
   }};
 `;
 
-const Avatar = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid #000000;
-  background-image: ${(props) =>
-    `url('https://api.adorable.io/avatars/100/${props.name}')`};
-  background-size: cover;
-`;
+// const Avatar = styled.div`
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 10px;
+//   border: 1px solid #000000;
+//   background-image: ${(props) =>
+//     `url('https://api.adorable.io/avatars/100/${props.name}')`};
+//   background-size: cover;
+// `;
 
 export default Players;
