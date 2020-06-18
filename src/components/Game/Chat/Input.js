@@ -16,8 +16,21 @@ const Form = ({ message, setMessage, sendMessage }) => (
   </Container>
 );
 
-const Container = styled.form``;
-const Input = styled.input``;
-const Button = styled.button``;
+const Container = styled.form`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  margin: 10px;
+`;
+const Input = styled.input`
+  flex: 1;
+  padding: 10px;
+  font-family: inherit;
+`;
+const Button = styled.button`
+  font-family: inherit;
+`;
 
 export default Form;

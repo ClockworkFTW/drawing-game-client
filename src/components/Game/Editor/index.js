@@ -49,9 +49,10 @@ const Editor = ({ socket, name }) => {
         options={options}
         blocked={blocked}
       />
-      <Palette options={options} setOptions={setOptions} />
-      <Brush options={options} setOptions={setOptions} />
-      <button onClick={clear}>clear</button>
+      <Group>
+        <Palette options={options} setOptions={setOptions} />
+        <Brush options={options} setOptions={setOptions} clear={clear} />
+      </Group>
     </Container>
   );
 };
@@ -59,6 +60,13 @@ const Editor = ({ socket, name }) => {
 const Container = styled.div`
   margin: 10px;
   flex: 1;
+`;
+
+const Group = styled.div`
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default Editor;

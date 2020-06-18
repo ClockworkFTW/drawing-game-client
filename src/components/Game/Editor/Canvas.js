@@ -68,6 +68,10 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: 10px;
   background: white;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 4px #c1c1c1 solid;
   overflow: hidden;
 `;
 

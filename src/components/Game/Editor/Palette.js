@@ -30,14 +30,14 @@ const darkColors = [
 ];
 
 const style = {
-  width: "40px",
-  height: "40px",
+  width: "30px",
+  height: "30px",
   outline: "none",
 };
 
 const Palette = ({ options, setOptions }) => (
   <Container>
-    <div>
+    <Row>
       {lightColors.map((color, i) => (
         <button
           key={i}
@@ -52,8 +52,8 @@ const Palette = ({ options, setOptions }) => (
           onClick={() => setOptions({ ...options, stroke: color })}
         ></button>
       ))}
-    </div>
-    <div>
+    </Row>
+    <Row>
       {darkColors.map((color, i) => (
         <button
           key={i}
@@ -68,15 +68,16 @@ const Palette = ({ options, setOptions }) => (
           onClick={() => setOptions({ ...options, stroke: color })}
         ></button>
       ))}
-    </div>
+    </Row>
   </Container>
 );
 
 const Container = styled.div`
   display: inline-block;
-  margin-top: 20px;
   border-radius: 10px;
   overflow: hidden;
 `;
+
+const Row = styled.div``;
 
 export default Palette;

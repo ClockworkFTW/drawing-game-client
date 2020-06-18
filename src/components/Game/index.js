@@ -25,7 +25,7 @@ const Game = () => {
     setName(name);
     setGame(game);
 
-    socket.emit("join", { name, game }, ({ error }) => setError(error));
+    socket.emit("join", { name, gameId: game }, ({ error }) => setError(error));
 
     return () => {
       socket.close();

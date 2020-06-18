@@ -35,10 +35,15 @@ const Chat = ({ socket, name }) => {
 };
 
 const Container = styled.ul`
+  position: relative;
   overflow: scroll;
   margin: 10px;
   flex: 0 0 400px;
   border-radius: 10px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 4px #c1c1c1 solid;
   background: white;
 `;
 

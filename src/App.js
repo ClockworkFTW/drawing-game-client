@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "reset-css";
 
+import bg from "./assets/bg.png";
+
 import Lobby from "./components/Lobby";
 import Game from "./components/Game";
 
@@ -24,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-family: 'Balsamiq Sans', cursive;
-    background: #45aaf2;
+    background-image: ${() => `url(${bg})`};
   }
   *, *:before, *:after {
     box-sizing: inherit;

@@ -59,7 +59,10 @@ const Input = styled.input`
   display: block;
   margin-bottom: 10px;
   padding: 10px;
-  border: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 4px #c1c1c1 solid;
   border-radius: 10px;
   background: #ffffff;
   outline: none;
@@ -72,7 +75,10 @@ const Button = styled.button`
   font-family: inherit;
   font-size: 16px;
   outline: none;
-  border: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 4px #c1c1c1 solid;
   border-radius: 10px;
   background: #ffffff;
   &:hover {
