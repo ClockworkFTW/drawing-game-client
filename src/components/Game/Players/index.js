@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Status from "./Status";
 import Info from "./Info";
+import { AvatarDisplay } from "../../Avatar";
 
 const Players = ({ socket, name }) => {
   const [players, setPlayers] = useState([]);
@@ -24,11 +25,7 @@ const Players = ({ socket, name }) => {
               <Status player={player} />
               <Info player={player} name={name} />
             </Group>
-            <Avatar
-              style={{ width: "80px", height: "80px" }}
-              avatarStyle="Transparent"
-              {...player.avatar}
-            />
+            <AvatarDisplay avatar={player.avatar} size="80px" />
           </Player>
         ))}
     </Container>

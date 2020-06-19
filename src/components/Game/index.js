@@ -15,17 +15,18 @@ let socket;
 const Game = () => {
   const { search } = useLocation();
   const [name, setName] = useState("");
-  const [game, setGame] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     socket = io(ENDPOINT);
 
-    const { name, game } = queryString.parse(search);
-    setName(name);
-    setGame(game);
+    const { name, game, avatar } = queryString.parse(search);
 
-    socket.emit("join", { name, gameId: game }, ({ error }) => setError(error));
+    setName(name);
+
+    socket.emit("join", { name, gameId: game, avatar }, ({ error }) =>
+      setError(error)
+    );
 
     return () => {
       socket.close();

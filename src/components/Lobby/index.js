@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { AvatarDisplay, AvatarRandomizer } from "../Avatar";
+
 const Lobby = () => {
   const [name, setName] = useState("");
   const [game, setGame] = useState("");
+  const [avatar, setAvatar] = useState("19021303040503000009070700");
+
+  const link = `/game?name=${name}&avatar=${avatar}&game=${game}`;
 
   return (
     <Wrapper>
       <Container>
-        <Avatar name={name} />
+        <AvatarRandomizer setAvatar={setAvatar} />
+        <AvatarDisplay avatar={avatar} size="200px" />
         <Input
           type="text"
           placeholder="Name"
@@ -22,7 +28,7 @@ const Lobby = () => {
           value={game}
           onChange={(e) => setGame(e.target.value)}
         />
-        <Link to={`/game?name=${name ? name : "random name"}&game=${game}`}>
+        <Link to={link}>
           <Button>Join Room</Button>
         </Link>
       </Container>
@@ -40,18 +46,9 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   width: 300px;
-  text-align: center;
-`;
-
-const Avatar = styled.div`
-  width: 100px;
-  height: 100px;
-  margin: 10px auto;
-  border-radius: 10px;
-  border: 2px solid #000000;
-  background-image: ${(props) =>
-    `url('https://api.adorable.io/avatars/200/${props.name}')`};
-  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Input = styled.input`
