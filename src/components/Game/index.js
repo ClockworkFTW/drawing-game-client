@@ -40,9 +40,9 @@ const Game = () => {
       <Wrapper>
         <Header socket={socket} setDimensions={setDimensions} />
         <Container>
-          <Players socket={socket} name={name} />
+          <Players socket={socket} name={name} height={dimensions.height} />
           <Editor socket={socket} name={name} dimensions={dimensions} />
-          <Chat socket={socket} name={name} />
+          <Chat socket={socket} name={name} height={dimensions.height} />
         </Container>
       </Wrapper>
     ) : null
@@ -59,8 +59,6 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-const Container = styled.div`
-  display: flex;
-`;
+const Container = styled.div``;
 
 export default Game;

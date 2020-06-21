@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Messages from "./Messages";
 import Input from "./Input";
 
-const Chat = ({ socket, name }) => {
+const Chat = ({ socket, name, height }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -23,7 +23,7 @@ const Chat = ({ socket, name }) => {
   };
 
   return (
-    <Container>
+    <Container height={height}>
       <Messages messages={messages} name={name} />
       <Input
         message={message}
@@ -36,15 +36,17 @@ const Chat = ({ socket, name }) => {
 
 const Container = styled.ul`
   position: relative;
-  overflow: scroll;
+  float: left;
+  width: 400px;
+  height: ${(props) => `${props.height}px`};
   margin: 10px;
-  flex: 0 0 400px;
   border-radius: 10px;
   border-top: none;
   border-right: none;
   border-left: none;
   border-bottom: 4px #c1c1c1 solid;
-  background: white;
+  background: #ffffff;
+  overflow: hidden;
 `;
 
 export default Chat;

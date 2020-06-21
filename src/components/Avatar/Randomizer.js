@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import Icon from "../Icon";
@@ -19,6 +19,10 @@ const Randomizer = ({ setAvatar }) => {
 
     setAvatar(config.join(""));
   };
+
+  useEffect(() => {
+    generate();
+  }, []);
 
   return (
     <Button onClick={generate}>

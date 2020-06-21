@@ -59,8 +59,8 @@ const Editor = ({ socket, name, dimensions }) => {
 };
 
 const Container = styled.div`
+  float: left;
   margin: 10px;
-  flex: 1;
 `;
 
 const Group = styled.div`

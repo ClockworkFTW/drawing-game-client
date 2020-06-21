@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "avataaars";
 import styled from "styled-components";
 
 import Status from "./Status";
 import Info from "./Info";
 import { AvatarDisplay } from "../../Avatar";
 
-const Players = ({ socket, name }) => {
+const Players = ({ socket, name, height }) => {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
@@ -16,7 +15,7 @@ const Players = ({ socket, name }) => {
   }, [socket]);
 
   return (
-    <Container>
+    <Container height={height}>
       {players
         .sort((a, b) => b.score - a.score)
         .map((player, i) => (
@@ -33,15 +32,18 @@ const Players = ({ socket, name }) => {
 };
 
 const Container = styled.ul`
+  float: left;
+  width: 260px;
+  height: ${(props) => `${props.height}px`};
   margin: 10px;
-  flex: 0 0 260px;
+  padding: 10px;
   border-radius: 10px;
   border-top: none;
   border-right: none;
   border-left: none;
   border-bottom: 4px #c1c1c1 solid;
   background: white;
-  overflow: hidden;
+  overflow: scroll;
 `;
 
 const Player = styled.li`
@@ -49,6 +51,7 @@ const Player = styled.li`
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px 0 20px;
+  border-radius: 10px;
   &:nth-child(odd) {
     background: #edf2f7;
   }

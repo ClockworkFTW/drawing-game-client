@@ -22,7 +22,8 @@ const Container = styled.form`
   left: 0;
   right: 0;
   display: flex;
-  margin: 10px;
+  padding: 10px;
+  background: #ffffff;
 `;
 const Input = styled.input`
   flex: 1;
