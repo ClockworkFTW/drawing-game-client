@@ -4,9 +4,7 @@ import styled from "styled-components";
 
 import Alert from "../Alert";
 
-const Canvas = ({ socket, lines, setLines, options, blocked }) => {
-  const [dimensions, setDimensions] = useState({ width: 500, height: 500 });
-
+const Canvas = ({ socket, lines, setLines, options, blocked, dimensions }) => {
   const stageRef = useRef(null);
 
   const [drawing, setDrawing] = useState(false);

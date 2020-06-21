@@ -33,13 +33,15 @@ const Game = () => {
     };
   }, [search]);
 
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   return !error ? (
     socket ? (
       <Wrapper>
-        <Header socket={socket} />
+        <Header socket={socket} setDimensions={setDimensions} />
         <Container>
           <Players socket={socket} name={name} />
-          <Editor socket={socket} name={name} />
+          <Editor socket={socket} name={name} dimensions={dimensions} />
           <Chat socket={socket} name={name} />
         </Container>
       </Wrapper>

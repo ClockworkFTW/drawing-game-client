@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Header = ({ socket }) => {
+const Header = ({ socket, setDimensions }) => {
   const [timer, setTimer] = useState("");
   const [word, setWord] = useState("");
   const [round, setRound] = useState("");
@@ -24,8 +24,25 @@ const Header = ({ socket }) => {
     });
   }, [socket]);
 
+  // Set canvas dimensions
+  const containerRef = useRef(null);
+
+  const handleResize = () => {
+    const width = containerRef.current.offsetWidth - 700;
+    setDimensions({ width, height: width * 0.75 });
+  };
+
+  useEffect(() => {
+    handleResize();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <Container>
+    <Container ref={containerRef}>
       <Timer>Time: {timer}</Timer>
       <Word>{word}</Word>
       <Round>Round {round} of 3</Round>

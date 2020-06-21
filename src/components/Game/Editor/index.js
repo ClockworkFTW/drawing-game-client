@@ -5,7 +5,7 @@ import Palette from "./Palette";
 import Brush from "./Brush";
 import Canvas from "./Canvas";
 
-const Editor = ({ socket, name }) => {
+const Editor = ({ socket, name, dimensions }) => {
   const [options, setOptions] = useState({
     stroke: "#000000",
     strokeWidth: 10,
@@ -48,6 +48,7 @@ const Editor = ({ socket, name }) => {
         setLines={setLines}
         options={options}
         blocked={blocked}
+        dimensions={dimensions}
       />
       <Group>
         <Palette options={options} setOptions={setOptions} />
