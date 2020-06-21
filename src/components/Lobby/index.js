@@ -7,7 +7,7 @@ import { AvatarDisplay, AvatarRandomizer } from "../Avatar";
 const Lobby = () => {
   const [name, setName] = useState("");
   const [game, setGame] = useState("");
-  const [avatar, setAvatar] = useState("19021303040503000009070700");
+  const [avatar, setAvatar] = useState(null);
 
   const link = `/game?name=${name}&avatar=${avatar}&game=${game}`;
 
@@ -15,7 +15,7 @@ const Lobby = () => {
     <Wrapper>
       <Container>
         <AvatarRandomizer setAvatar={setAvatar} />
-        <AvatarDisplay avatar={avatar} size="200px" />
+        {avatar ? <AvatarDisplay avatar={avatar} size="200px" /> : null}
         <Input
           type="text"
           placeholder="Name"
@@ -29,7 +29,7 @@ const Lobby = () => {
           onChange={(e) => setGame(e.target.value)}
         />
         <Link to={link}>
-          <Button>Join Room</Button>
+          <Button>Join Game</Button>
         </Link>
       </Container>
     </Wrapper>
@@ -80,8 +80,6 @@ const Button = styled.button`
   background: #ffffff;
   &:hover {
     cursor: pointer;
-    color: #ffffff;
-    background: #000000;
   }
 `;
 

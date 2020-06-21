@@ -10,7 +10,7 @@ import medium from "../../../assets/icons/medium.svg";
 import large from "../../../assets/icons/large.svg";
 
 const Brush = ({ options, setOptions, clear }) => (
-  <div>
+  <Container>
     <Button onClick={() => setOptions({ ...options, strokeWidth: 5 })}>
       <Icon src={small} />
     </Button>
@@ -40,8 +40,12 @@ const Brush = ({ options, setOptions, clear }) => (
     <Button onClick={clear}>
       <Icon src={trash} />
     </Button>
-  </div>
+  </Container>
 );
+
+const Container = styled.div`
+  margin-top: 10px;
+`;
 
 const Button = styled.button`
   margin-left: 5px;

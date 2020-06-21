@@ -61,7 +61,7 @@ const Wrapper = styled.div`
 const Container = styled.div``;
 
 const Text = styled.h1`
-  font-size: 22px;
+  font-size: 32px;
 `;
 
 const Button = styled.button`

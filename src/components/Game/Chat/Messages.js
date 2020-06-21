@@ -29,11 +29,11 @@ const Container = styled.div`
   border-radius: 10px;
   color: ${(props) => {
     if (props.me) {
-      return "blue";
+      return "#4b7bec";
     } else if (props.admin) {
-      return "black";
+      return "#718096";
     } else {
-      return "red";
+      return "#000000";
     }
   }};
   &:nth-child(even) {

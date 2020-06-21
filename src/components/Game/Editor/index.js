@@ -50,7 +50,7 @@ const Editor = ({ socket, name, dimensions }) => {
         blocked={blocked}
         dimensions={dimensions}
       />
-      <Group>
+      <Group width={dimensions.width}>
         <Palette options={options} setOptions={setOptions} />
         <Brush options={options} setOptions={setOptions} clear={clear} />
       </Group>
@@ -64,10 +64,12 @@ const Container = styled.div`
 `;
 
 const Group = styled.div`
+  width: ${(props) => `${props.width}px`};
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 export default Editor;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
+import alarm from "../../../assets/icons/alarm.svg";
+
 const Header = ({ socket, setDimensions }) => {
   const [timer, setTimer] = useState("");
   const [word, setWord] = useState("");
@@ -43,7 +45,7 @@ const Header = ({ socket, setDimensions }) => {
 
   return (
     <Container ref={containerRef}>
-      <Timer>Time: {timer}</Timer>
+      <Timer icon={alarm}>{timer}</Timer>
       <Word>{word}</Word>
       <Round>Round {round} of 3</Round>
     </Container>
@@ -55,7 +57,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 10px;
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: 10px;
   border-top: none;
   border-right: none;
@@ -65,12 +67,20 @@ const Container = styled.div`
 `;
 
 const Word = styled.h1`
-  font-size: 30px;
+  font-size: 36px;
   letter-spacing: 3px;
 `;
 
-const Timer = styled.h1`
-  font-size: 20px;
+const Timer = styled.div`
+  width: 60px;
+  height: 60px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  background-image: ${(props) => `url(${props.icon})`};
+  background-size: cover;
 `;
 
 const Round = styled.h1`
