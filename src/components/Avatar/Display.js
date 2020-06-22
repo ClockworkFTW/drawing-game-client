@@ -1,24 +1,29 @@
 import React from "react";
 import Avatar from "avataaars";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 import { options } from "./options";
 
-const Display = ({ avatar, size }) => {
-  let arr = avatar.match(/.{2}/g);
+const Display = ({ avatar, animate, size }) => {
+  let config;
 
-  arr = arr.map((n) => {
-    if (n[0] === 0) {
-      return Number(n[1]);
-    } else {
-      return Number(n);
-    }
-  });
+  if (avatar) {
+    let arr = avatar.match(/.{2}/g);
 
-  const config = options.map((option, i) => option[arr[i]]);
+    arr = arr.map((n) => {
+      if (n[0] === 0) {
+        return Number(n[1]);
+      } else {
+        return Number(n);
+      }
+    });
 
-  return (
-    <Container size={size}>
+    config = options.map((option, i) => option[arr[i]]);
+  }
+
+  return avatar ? (
+    <Container size={size} animate={animate ? loop : still}>
       <Avatar
         style={{ width: "100%", height: "100%" }}
         avatarStyle="Transparent"
@@ -37,12 +42,22 @@ const Display = ({ avatar, size }) => {
         skinColor={config[12]}
       />
     </Container>
-  );
+  ) : null;
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: ${(props) => props.size};
   height: ${(props) => props.size};
 `;
+
+const loop = {
+  scale: [1, 1.1, 1],
+  rotate: [-5, 5],
+  translateX: [-10, 0, 10],
+  translateY: [10, 0, 10],
+  transition: { yoyo: Infinity, duration: 2 },
+};
+
+const still = { scale: 1 };
 
 export default Display;

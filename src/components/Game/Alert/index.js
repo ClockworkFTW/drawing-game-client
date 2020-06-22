@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 
+import Button from "../../Button";
+
 const Alert = ({ socket }) => {
   const [alert, setAlert] = useState("");
   const [words, setWords] = useState([]);
@@ -46,9 +48,9 @@ const Alert = ({ socket }) => {
               ? words.map((word, i) => (
                   <Button
                     key={i}
-                    onClick={() => pickWord(word)}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.8 }}
+                    action={() => pickWord(word)}
+                    margin="20px"
+                    padding="10px 20px"
                   >
                     {word}
                   </Button>
@@ -82,23 +84,6 @@ const Text = styled.h1`
   text-align: center;
   font-size: 32px;
   color: #ffffff;
-`;
-
-const Button = styled(motion.button)`
-  margin: 20px;
-  padding: 10px 20px;
-  font-family: inherit;
-  font-size: 22px;
-  outline: none;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 4px #c1c1c1 solid;
-  border-radius: 10px;
-  background: #ffffff;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export default Alert;

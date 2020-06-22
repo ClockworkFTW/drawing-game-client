@@ -52,6 +52,7 @@ const Player = styled.li`
   align-items: center;
   padding: 10px 10px 0 20px;
   border-radius: 10px;
+  overflow: hidden;
   &:nth-child(odd) {
     background: #edf2f7;
   }
