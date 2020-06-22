@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
+import Logo from "./Logo";
 import { AvatarDisplay, AvatarRandomizer } from "../Avatar";
 
 const Lobby = () => {
@@ -14,8 +16,21 @@ const Lobby = () => {
   return (
     <Wrapper>
       <Container>
+        <Logo />
         <AvatarRandomizer setAvatar={setAvatar} />
-        {avatar ? <AvatarDisplay avatar={avatar} size="200px" /> : null}
+        {avatar ? (
+          <Animate
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [-5, 5],
+              translateX: [-10, 0, 10],
+              translateY: [10, 0, 10],
+              transition: { yoyo: Infinity, duration: 2 },
+            }}
+          >
+            <AvatarDisplay avatar={avatar} size="200px" />
+          </Animate>
+        ) : null}
         <Input
           type="text"
           placeholder="Name"
@@ -24,12 +39,14 @@ const Lobby = () => {
         />
         <Input
           type="text"
-          placeholder="Room"
+          placeholder="Game"
           value={game}
           onChange={(e) => setGame(e.target.value)}
         />
         <Link to={link}>
-          <Button>Join Game</Button>
+          <Button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+            Join Game
+          </Button>
         </Link>
       </Container>
     </Wrapper>
@@ -51,7 +68,10 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Animate = styled(motion.div)``;
+
 const Input = styled.input`
+  z-index: 1;
   width: 100%;
   display: block;
   margin-bottom: 10px;
@@ -67,7 +87,8 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const Button = styled.button`
+const Button = styled(motion.button)`
+  margin-top: 20px;
   padding: 10px 20px;
   font-family: inherit;
   font-size: 16px;

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "avataaars": "^1.2.1",
     "css": "^2.2.4",
+    "framer-motion": "^1.11.1",
     "konva": "^6.0.0",
     "query-string": "^6.12.1",
     "react": "^16.13.1",

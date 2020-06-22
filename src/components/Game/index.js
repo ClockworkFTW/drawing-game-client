@@ -4,6 +4,7 @@ import queryString from "query-string";
 import io from "socket.io-client";
 import styled from "styled-components";
 
+import Logo from "../Lobby/Logo";
 import Header from "./Header";
 import Players from "./Players";
 import Editor from "./Editor";
@@ -38,6 +39,7 @@ const Game = () => {
   return !error ? (
     socket ? (
       <Wrapper>
+        <Logo />
         <Header socket={socket} setDimensions={setDimensions} />
         <Container>
           <Players socket={socket} name={name} height={dimensions.height} />

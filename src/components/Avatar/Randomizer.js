@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 import Icon from "../Icon";
-import cupid from "../../assets/icons/cupid.svg";
+import cycle from "../../assets/icons/cycle.svg";
 
 import { options } from "./options";
 
@@ -25,13 +26,19 @@ const Randomizer = ({ setAvatar }) => {
   }, []);
 
   return (
-    <Button onClick={generate}>
-      <Icon icon={cupid} size="30px" />
+    <Button
+      onClick={generate}
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.8 }}
+    >
+      <Icon icon={cycle} size="20px" />
     </Button>
   );
 };
 
-const Button = styled.button`
+const Button = styled(motion.button)`
+  margin-bottom: 20px;
+  padding: 10px 10px 5px 10px;
   outline: none;
   border-top: none;
   border-right: none;

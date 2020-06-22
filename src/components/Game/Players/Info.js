@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 const Info = ({ player, name }) => (
   <Container>
-    <Score scored={player.locked}>{player.score}</Score>
+    <Score scored={player.locked} animate={{ scale: [1, 2, 1] }}>
+      {player.score}
+    </Score>
     <Name me={player.name === name}>{player.name}</Name>
   </Container>
 );
