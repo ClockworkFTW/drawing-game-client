@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-import alarm from "../../../assets/icons/alarm.svg";
+import Timer from "./Timer";
 
 const Header = ({ socket, setDimensions }) => {
   const [timer, setTimer] = useState("");
@@ -46,16 +46,7 @@ const Header = ({ socket, setDimensions }) => {
 
   return (
     <Container ref={containerRef}>
-      <Timer
-        icon={alarm}
-        animate={{
-          scale: timer === 80 ? [1, 1] : [1, 1.1],
-          rotate: timer === 80 ? [0, 0] : [5, -5],
-          transition: { yoyo: Infinity, duration: 0.5 },
-        }}
-      >
-        {timer}
-      </Timer>
+      <Timer timer={timer} />
       <Word>{word}</Word>
       <Round>Round {round} of 3</Round>
     </Container>
@@ -79,18 +70,6 @@ const Container = styled.div`
 const Word = styled.h1`
   font-size: 36px;
   letter-spacing: 3px;
-`;
-
-const Timer = styled(motion.div)`
-  width: 60px;
-  height: 60px;
-  padding-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 26px;
-  background-image: ${(props) => `url(${props.icon})`};
-  background-size: cover;
 `;
 
 const Round = styled.h1`

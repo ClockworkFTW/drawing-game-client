@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import UIfx from "uifx";
 import styled from "styled-components";
 
-import Button from "../../Button";
+import Words from "./Words";
+import Winner from "./Winner";
+
+import swishMP3 from "../../../assets/audio/swish.wav";
+import swoopMP3 from "../../../assets/audio/swoop.mp3";
+const swish = new UIfx(swishMP3, { volume: 0.5 });
+const swoop = new UIfx(swoopMP3, { volume: 0.5 });
 
 const Alert = ({ socket }) => {
-  const [alert, setAlert] = useState("");
-  const [words, setWords] = useState([]);
+  const [alert, setAlert] = useState(null);
+  const [words, setWords] = useState(null);
+  const [winner, setWinner] = useState(null);
+
+  const render = alert || words || winner;
+
+  useEffect(() => {
+    swish.play();
+    return () => {
+      swoop.play();
+    };
+  }, [render]);
 
   useEffect(() => {
     socket.on("alert", (alert) => {
-      setWords([]);
       setAlert(alert);
+      reset("alert");
     });
-  }, [socket]);
 
-  useEffect(() => {
     socket.on("words", (words) => {
       setWords(words);
-      setAlert("");
+      reset("words");
     });
-  }, [socket]);
 
-  useEffect(() => {
     socket.on("word", (word) => {
-      setWords([]);
-      setAlert("");
+      reset("word");
+    });
+
+    socket.on("winner", (winner) => {
+      setWinner(winner);
+      reset("winner");
     });
   }, [socket]);
 
@@ -33,9 +50,33 @@ const Alert = ({ socket }) => {
     socket.emit("pick word", word);
   };
 
+  const reset = (name) => {
+    switch (name) {
+      case "alert":
+        setWords(null);
+        setWinner(null);
+        break;
+      case "words":
+        setAlert(null);
+        setWinner(null);
+        break;
+      case "word":
+        setAlert(null);
+        setWords(null);
+        setWinner(null);
+        break;
+      case "winner":
+        setAlert(null);
+        setWords(null);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <AnimatePresence>
-      {alert || words.length > 0 ? (
+      {render ? (
         <Wrapper
           initial={{ transform: "translateY(-1000px)", opacity: 0 }}
           animate={{ transform: "translateY(0px)", opacity: 1 }}
@@ -44,18 +85,8 @@ const Alert = ({ socket }) => {
         >
           <Container>
             {alert ? <Text>{alert}</Text> : null}
-            {words
-              ? words.map((word, i) => (
-                  <Button
-                    key={i}
-                    action={() => pickWord(word)}
-                    margin="20px"
-                    padding="10px 20px"
-                  >
-                    {word}
-                  </Button>
-                ))
-              : null}
+            <Words words={words} pickWord={pickWord} />
+            <Winner winner={winner} />
           </Container>
         </Wrapper>
       ) : null}
