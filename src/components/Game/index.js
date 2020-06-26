@@ -10,7 +10,7 @@ import Players from "./Players";
 import Editor from "./Editor";
 import Chat from "./Chat";
 
-const ENDPOINT = "http://localhost:3005/";
+const ENDPOINT = "/";
 let socket;
 
 const Game = () => {
